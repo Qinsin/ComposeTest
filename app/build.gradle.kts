@@ -71,8 +71,6 @@ dependencies {
     // https://mvnrepository.com/artifact/androidx.datastore/datastore
     implementation("androidx.datastore:datastore:1.0.0")
 
-    // https://mvnrepository.com/artifact/com.google.accompanist/accompanist-systemuicontroller
-//    implementation("com.google.accompanist:accompanist-systemuicontroller:0.30.1")
 
 
 }

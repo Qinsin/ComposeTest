@@ -30,12 +30,13 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
+import androidx.core.content.pm.PermissionInfoCompat.Protection
 import com.winspread.compose.bean.ThemeBean
-import com.winspread.compose.config.CHANGED_THEME
-import com.winspread.compose.ui.theme.ComposeTestTheme
 import com.winspread.compose.bean.ThemeType
+import com.winspread.compose.config.CHANGED_THEME
+import com.winspread.compose.config.themeList
+import com.winspread.compose.ui.theme.ComposeTestTheme
 import com.winspread.compose.utlis.DataStoreUtils
-import com.winspread.compose.utlis.loge
 
 class MainActivity : ComponentActivity() {
 
@@ -48,30 +49,12 @@ class MainActivity : ComponentActivity() {
     private fun getDefaultThemeId(): Int = DataStoreUtils.getSyncData(CHANGED_THEME, ThemeType.SKY_BLUE_THEME.type)
 
 
-    // 主题列表
-    private val themeList = mutableListOf(
-        ThemeBean(ThemeType.SKY_BLUE_THEME),
-        ThemeBean(ThemeType.GRAY_THEME),
-        ThemeBean(ThemeType.DEEP_BLUE_THEME),
-        ThemeBean(ThemeType.GREEN_THEME),
-        ThemeBean(ThemeType.PURPLE_THEME),
-        ThemeBean(ThemeType.ORANGE_THEME),
-        ThemeBean(ThemeType.BROWN_THEME),
-        ThemeBean(ThemeType.RED_THEME),
-        ThemeBean(ThemeType.CYAN_THEME),
-        ThemeBean(ThemeType.MAGENTA_THEME)
-    )
-
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
             ComposeTestTheme(themeTypeState.value) {
                 // A surface container using the 'background' color from the theme
                 Surface(modifier = Modifier.fillMaxSize(), color = MaterialTheme.colorScheme.primary) {
-
-
-                    "${MaterialTheme.colorScheme.primary}".loge()
                     Greeting(themeList, themeTypeState)
                 }
             }
@@ -83,8 +66,7 @@ class MainActivity : ComponentActivity() {
 fun Greeting(themeList: MutableList<ThemeBean>, themeTypeState: MutableState<Int>) {
 
     Column(
-        modifier = Modifier
-            .fillMaxSize()
+        modifier = Modifier.fillMaxSize()
 
     ) {
         Spacer(modifier = Modifier.height(20.dp))
@@ -108,7 +90,6 @@ fun Greeting(themeList: MutableList<ThemeBean>, themeTypeState: MutableState<Int
         }
     }
 }
-
 @Composable
 fun ThemeItem(playTheme: Int, item: ThemeBean, content: () -> Unit) {
     Column(
@@ -123,8 +104,7 @@ fun ThemeItem(playTheme: Int, item: ThemeBean, content: () -> Unit) {
                 .clip(RoundedCornerShape(10.dp))
                 .background(item.themeType.color)
                 .size(50.dp)
-                .padding(20.dp),
-            contentAlignment = Alignment.Center
+                .padding(20.dp), contentAlignment = Alignment.Center
         ) {
             if (playTheme == item.themeType.type) {
                 Image(
@@ -142,6 +122,7 @@ fun ThemeItem(playTheme: Int, item: ThemeBean, content: () -> Unit) {
                 .padding(4.dp)
         )
     }
+
 }
 
 
