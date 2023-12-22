@@ -2,6 +2,7 @@ package com.amin.soldier.ui.theme
 
 import android.app.Activity
 import android.os.Build
+import androidx.annotation.DrawableRes
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.darkColorScheme
@@ -18,6 +19,8 @@ import androidx.compose.ui.graphics.toArgb
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalView
 import androidx.core.view.WindowCompat
+import com.amin.soldier.MyApp
+import com.amin.soldier.R
 import com.amin.soldier.config.THEME_STATE
 import com.amin.soldier.utils.DataStoreUtils
 
@@ -88,6 +91,7 @@ fun ComposeTestTheme(
             window.navigationBarColor = Color.Transparent.toArgb()//导航栏透明
             WindowCompat.getInsetsController(window, view).isAppearanceLightStatusBars = darkTheme
             WindowCompat.setDecorFitsSystemWindows(window,false)//沉浸式
+
         }
     }
 

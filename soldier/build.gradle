@@ -89,6 +89,9 @@ dependencies {
     implementation("com.google.accompanist:accompanist-permissions:0.32.0")
 
     implementation ("com.winspread.soldier:solidierLib:1.0.8-20231216.072815-3")
+
+
+    implementation "com.google.code.gson:gson:2.8.6"
 }
 
 kapt {

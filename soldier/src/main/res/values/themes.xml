@@ -2,4 +2,13 @@
 <resources>
 
     <style name="Theme.ComposeTest" parent="android:Theme.Material.Light.NoActionBar" />
+
+
+    <style name="SplashTheme" parent="android:Theme.Material.Light.NoActionBar.TranslucentDecor">
+        <item name="colorPrimary">@color/purple_500</item>
+        <item name="colorPrimaryDark">@color/purple_700</item>
+        <item name="colorAccent">@color/color_FF1F1F1F</item>
+        <item name="android:windowBackground">@drawable/ic_image_splash</item>
+        <item name="background">@color/white</item>
+    </style>
 </resources>

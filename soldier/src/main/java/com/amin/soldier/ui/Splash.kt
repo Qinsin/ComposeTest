@@ -6,20 +6,28 @@ import android.content.Intent
 import android.net.Uri
 import android.os.Build
 import android.provider.Settings
+import androidx.compose.foundation.Image
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.res.painterResource
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.LifecycleEventObserver
 import androidx.lifecycle.LifecycleOwner
 import com.amin.soldier.MyApp
+import com.amin.soldier.R
 import com.amin.soldier.utils.DialogTwoBtn
 import com.google.accompanist.permissions.ExperimentalPermissionsApi
 import com.google.accompanist.permissions.rememberMultiplePermissionsState
 import com.winspread.solidierlib.utils.loge
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.runBlocking
 
 
@@ -31,13 +39,32 @@ import kotlinx.coroutines.runBlocking
  *
  */
 @SuppressLint("MissingPermission")
-@OptIn(ExperimentalPermissionsApi::class)
 @Composable
 fun MySplashScreen(lifecycle: Lifecycle) {
-    permissionRequest(lifecycle = lifecycle) {
-        "授权:$it".loge()
+    var isSplash by remember {
+        mutableStateOf(true)
+    }
+    Box(
+        modifier = Modifier.fillMaxSize()
+    ) {
+        if (isSplash) {
+            Image(
+                painter = painterResource(id = R.drawable.ic_image_splash),
+                contentDescription = "启动页",
+                modifier = Modifier.fillMaxSize(),
+                contentScale = ContentScale.FillHeight,
+            )
+        } else {
+            AppScaffold()
+        }
+        permissionRequest(lifecycle = lifecycle) {
+            "授权:$it".loge()
+            isSplash = false
+
+        }
     }
 }
+
 
 @OptIn(ExperimentalPermissionsApi::class)
 @Composable
@@ -89,6 +116,9 @@ fun permissionRequest(
     lifecycle.addObserver(AppLifeObserver())
     when (multiplePermissionsState.allPermissionsGranted) {
         true -> {
+            runBlocking {
+                delay(1000)
+            }
             success.invoke(true)
         }
 
